@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>  
+  <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+  window.onload = function () {
+	var dataPoints1 = [];
+	var dataPoints2 = [];
+	
+	var tempData = $.ajax({
+          url: "data.html",
+          dataType:"html",
+          async: false
+    }).responseText; 
+	
+	var indoorX=tempData.split(";")[0];
+	var indoorY=tempData.split(";")[1];
+	var outdoorX=tempData.split(";")[2];
+	var outdoorY=tempData.split(";")[3];
+	
+	for(var i=0;i<indoorX.split(",").length-1;i++)
+	{
+		dataPoints1.push({
+			x: parseInt(indoorX.split(",")[i]),
+			y: parseInt(indoorY.split(",")[i])
+		});	
+	}
+	
+	for(var i=0;i<outdoorX.split(",").length-1;i++)
+	{
+		dataPoints2.push({
+			x: parseInt(outdoorX.split(",")[i]),
+			y: parseInt(outdoorY.split(",")[i])
+		});	
+	}
+	
+	
+	var chart = new CanvasJS.Chart("chartContainer",
+			{
+                                zoomEnabled: true,
+				title:{
+					text: "Temperature for indoor and outdoor",
+					fontSize: 30
+				},
+				axisX:{
+
+					gridColor: "Silver",
+					tickColor: "silver",
+					//valueFormatString: "DD/MMM"
+
+				},                        
+	                        toolTip:{
+	                          shared:true
+	                        },
+				theme: "theme2",
+				axisY: {
+                                        includeZero: false,
+					gridColor: "Silver",
+					tickColor: "silver"
+				},
+				legend:{
+					verticalAlign: "center",
+					horizontalAlign: "right"
+				},
+				data: [
+				{        
+					type: "line",
+					xValueType: "dateTime",
+					showInLegend: true,
+					lineThickness: 2,
+					name: "Indoor",
+					markerType: "square",
+                                        markerSize: 8,
+					color: "#F08080",
+					dataPoints: dataPoints1
+				},
+				{        
+					type: "line",
+					xValueType: "dateTime",
+					showInLegend: true,
+					name: "Outdoor",
+                                        markerType: "circle",
+                                        markerSize: 8,
+					color: "#20B2AA",
+					lineThickness: 2,
+					dataPoints:  dataPoints2
+				}
+
+				
+				],
+	          legend:{
+	            cursor:"pointer",
+	            itemclick:function(e){
+	              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+	              	e.dataSeries.visible = false;
+	              }
+	              else{
+	                e.dataSeries.visible = true;
+	              }
+	              chart.render();
+	            }
+	          }
+			});
+
+	chart.render();
+	}
+</script>
+<script type="text/javascript" src="./js/canvasjs.min.js"></script>
+</head>
+<body>
+  <h1>Meeting Room 1101 Temperature Chart V30</h1>
+  <div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+</body>
+</html>

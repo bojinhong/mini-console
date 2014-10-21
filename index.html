@@ -1,116 +1,112 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-<head>  
-  <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript">
-  window.onload = function () {
-	var dataPoints1 = [];
-	var dataPoints2 = [];
-	
-	var tempData = $.ajax({
-          url: "data.html",
-          dataType:"html",
-          async: false
-    }).responseText; 
-	
-	var indoorX=tempData.split(";")[0];
-	var indoorY=tempData.split(";")[1];
-	var outdoorX=tempData.split(";")[2];
-	var outdoorY=tempData.split(";")[3];
-	
-	for(var i=0;i<indoorX.split(",").length-1;i++)
-	{
-		dataPoints1.push({
-			x: parseInt(indoorX.split(",")[i]),
-			y: parseInt(indoorY.split(",")[i])
-		});	
-	}
-	
-	for(var i=0;i<outdoorX.split(",").length-1;i++)
-	{
-		dataPoints2.push({
-			x: parseInt(outdoorX.split(",")[i]),
-			y: parseInt(outdoorY.split(",")[i])
-		});	
-	}
-	
-	
-	var chart = new CanvasJS.Chart("chartContainer",
-			{
-                                zoomEnabled: true,
-				title:{
-					text: "Temperature for indoor and outdoor",
-					fontSize: 30
-				},
-				axisX:{
+    <title>Jumbotron Template for Bootstrap</title>
 
-					gridColor: "Silver",
-					tickColor: "silver",
-					//valueFormatString: "DD/MMM"
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
 
-				},                        
-	                        toolTip:{
-	                          shared:true
-	                        },
-				theme: "theme2",
-				axisY: {
-                                        includeZero: false,
-					gridColor: "Silver",
-					tickColor: "silver"
-				},
-				legend:{
-					verticalAlign: "center",
-					horizontalAlign: "right"
-				},
-				data: [
-				{        
-					type: "line",
-					xValueType: "dateTime",
-					showInLegend: true,
-					lineThickness: 2,
-					name: "Indoor",
-					markerType: "square",
-                                        markerSize: 8,
-					color: "#F08080",
-					dataPoints: dataPoints1
-				},
-				{        
-					type: "line",
-					xValueType: "dateTime",
-					showInLegend: true,
-					name: "Outdoor",
-                                        markerType: "circle",
-                                        markerSize: 8,
-					color: "#20B2AA",
-					lineThickness: 2,
-					dataPoints:  dataPoints2
-				}
+    <!-- Custom styles for this template -->
+    <link href="./css/jumbotron.css" rel="stylesheet">
 
-				
-				],
-	          legend:{
-	            cursor:"pointer",
-	            itemclick:function(e){
-	              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-	              	e.dataSeries.visible = false;
-	              }
-	              else{
-	                e.dataSeries.visible = true;
-	              }
-	              chart.render();
-	            }
-	          }
-			});
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
 
-	chart.render();
-	}
-</script>
-<script type="text/javascript" src="./js/canvasjs.min.js"></script>
-</head>
-<body>
-  <h1>Meeting Room 1101 Temperature Chart V30</h1>
-  <div id="chartContainer" style="height: 300px; width: 100%;">
-  </div>
-</body>
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Mini-Console</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Read me</h1>
+        <p>This is a mini-console for meeting room 1101. You can get all information about this meeting room such as temperature, power consumption,...</p>
+        <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+       </div>
+        <div class="col-lg-4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery-1.11.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+  </body>
 </html>
+
